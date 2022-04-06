@@ -6,10 +6,10 @@ import Post from '../components/home/Post'
 import { POST } from '../data/posts.'
 import BottomTabs, { bottomTabIcons } from '../components/home/BottomTabs'
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header/>
+      <Header navigation={navigation}/>
       <Stories/>
       <ScrollView>
       {
