@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
 
-const LoginForm = () => {
+const LoginForm = ({navigation}) => {
     const LoginFormSchema = Yup.object().shape({
         email: Yup.string().email().required('An email is required'),
         password: Yup.string().required().min(6, 'Password must be at least 6 characters long')
@@ -21,7 +21,7 @@ const LoginForm = () => {
             validationSchema={LoginFormSchema}
             validateOnMount={true}
         >
-        {({handleBlur, handleChange, handleSubmit, isValid, values, errors, touched}) => (
+        {({handleBlur, handleChange, handleSubmit, isValid, values}) => (
             <Fragment>
                 <View style={[
                     styles.inputField,
@@ -78,7 +78,7 @@ const LoginForm = () => {
                 </Pressable>
                 <View style={styles.signupContainer}>
                     <Text>Don't have an account? </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.push("SignupScreen")}>
                         <Text style={{ color: '#6BB0F5' }}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
