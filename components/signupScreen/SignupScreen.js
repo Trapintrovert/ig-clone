@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, Pressable, TouchableOpacity, Alert }
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import Validator from 'email-validator'
-import { db, firebase } from '../../firebase.'
+import { db, firebase } from '../../firebase'
 
 
 const SignupForm = ({navigation}) => {
@@ -25,7 +25,9 @@ const SignupForm = ({navigation}) => {
             const authUser = await firebase.auth().createUserWithEmailAndPassword(email, password)
             console.log(' Firebase User Created Successfully', email, password)
 
-            db.collection('users').add({
+            db.collection('users')
+            .doc(authUser.user.email)
+            .set({
                 owner_uid: authUser.user.uid,
                 username: username,
                 email: authUser.user.email,
